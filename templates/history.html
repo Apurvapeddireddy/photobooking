@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Event Booking History</h1>
+    {% if events %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Event Type</th>
+                    <th>Event Date</th>
+                    <th>Guests</th>
+                    <th>Special Requests</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                    <tr>
+                        <td>{{ event.full_name }}</td>
+                        <td>{{ event.email }}</td>
+                        <td>{{ event.phone }}</td>
+                        <td>{{ event.event_type }}</td>
+                        <td>{{ event.event_date }}</td>
+                        <td>{{ event.guests }}</td>
+                        <td>{{ event.special_requests or 'None' }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No event bookings found.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style>
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    h1 {
+        color: #007bff;
+        margin-bottom: 20px;
+    }
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .table th, .table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    .table th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+    .table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    .table tr:hover {
+        background-color: #ddd;
+    }
+</style>
+{% endblock %}
